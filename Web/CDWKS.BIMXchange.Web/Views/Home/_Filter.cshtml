@@ -1,0 +1,72 @@
+﻿@model List<CDWKS.BIMXchange.Web.Models.Partial.FilterItemViewModel>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<style>
+.ui-button { margin-left: -1px; }
+.ui-button-icon-only .ui-button-text { padding: 0.35em; } 
+.ui-autocomplete-input { margin: 12px 0px 0 0px; padding: 0.48em 0 0.47em 0.45em; width: 65% }​
+</style>
+ 
+<div>
+ <div class="ui-widget">
+<input id="combobox" /> 
+</div>​
+ <input type="text" id="Main_txtValue" class="TextInput" style="width:160px;"/>
+            <input type="image" id="Main_btnAddFilter" class="TextInput" src="@Url.Content("~/content/images/btnAddFilter.png")" style="height:30px;"/>
+            
+
+</div>
+ 
+<div>
+@foreach(var filter in Model)
+ {
+     @Html.Partial("_FilterListItem", filter)
+ }
+</div>
+
+<script type="text/javascript">
+(function ($) {
+$.widget("ui.combobox", {
+    _create: function() {
+        var wrapper = this.wrapper = $("<span />").addClass("ui-combobox")
+            , self = this;
+        
+        this.element.wrap(wrapper);
+
+        this.element
+            .addClass("ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
+            .autocomplete($.extend({
+                minLength: 0
+            }, this.options));
+
+        $("<a />")
+            .insertAfter(this.element)
+            .button({
+                icons: {
+                    primary: "ui-icon-triangle-1-s"
+                },
+                text: false
+            })
+            .removeClass("ui-corner-all")
+            .addClass("ui-corner-right ui-combobox-toggle")
+            .click(function () {
+                if (self.element.autocomplete("widget" ).is(":visible")) {
+                    self.element.autocomplete("close");
+                    return;
+                }
+
+                $(this).blur();
+                
+                self.element.autocomplete("search", "");
+                self.element.focus();
+            });
+    },
+
+    destroy: function() {
+        this.wrapper.remove();
+        $.Widget.prototype.destroy.call(this);
+    }
+});
+})(jQuery);
+$(function () { $("#combobox").combobox({ source: "http://localhost:1993/data/parameternames/" }); });
+</script>
+

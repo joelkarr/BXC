@@ -1,0 +1,10 @@
+﻿@model CDWKS.BIMXchange.Web.Models.Partial.FilterItemViewModel 
+<div class="FilterBox">
+    <div id="removeBox" class="FilterBoxleft">
+       <a href="@Model.Url"><input type="image" id="btnRemove" class="RemoveImage" src="/content/images/remove.png" style="height:25px;width:25px;"/></a> 
+    </div>
+    <div id="box2" class="FilterBoxright">
+        @Model.FieldName <br/>
+        Contains @(Model.SearchKeyName)
+    </div>
+</div>

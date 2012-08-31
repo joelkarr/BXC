@@ -1,0 +1,28 @@
+﻿@model CDWKS.BIMXchange.Web.Models.Partial.ItemSummaryViewModel
+<div class="@Model.HtmlClass">
+    <img id="Image1" style="float: left; padding: 10px;" width="80px" src="http://bxc.mepcontent.com/Images/FileImages/@(Model.FamilyName).gif" alt="Stock Image" />                                                                                              
+        <div class="itemprops">
+        <span class="itemheader">@Model.FamilyName</span>
+        <br />
+        <span class="itemsubheader">@(Model.Name)</span>
+
+        <br />
+            <div id="divProps">
+                @foreach(var attribute in Model.FeaturedAttributes)
+                {
+                    <span style="font-weight: bold;">@(attribute.Key):</span>
+                    @(attribute.Value)<br/>
+                }
+            </div>
+        </div>
+    <div style="">
+        <div style="height:50px;">
+        @if (Model.TypeCatalog != String.Empty)
+        {
+            <input type="image" id="btnShowTC" src="@Url.Content("Content/Images/TypeCatalogButton.png")" class="imagebutton" />
+        }
+        </div>
+        <input type="image" id="btnDownload" src="@Url.Content("Content/Images/LoadFileButton.png")" class="imagebutton"   />
+    </div>
+    </div>
+                          
